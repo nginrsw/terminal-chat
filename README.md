@@ -1,6 +1,6 @@
 # Terminal-chat
 
-A simple terminal-based chat application powered by the [`nginr` preprocessor](https://github.com/nginrsw/nginr). This project allows you to interact with AI models directly from your terminal.
+A simple terminal-based chat application powered by the [nginr-preprocessor](https://github.com/nginrsw/nginr). This project allows you to interact with AI models directly from your terminal.
 
 ## Features
 - Chat with AI models in your terminal
