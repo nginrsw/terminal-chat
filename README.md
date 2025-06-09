@@ -10,7 +10,7 @@ A simple terminal-based chat application powered by the [nginr-preprocessor](htt
 ## Quick Start
 
 ### Prerequisites
-- Python 3.12 or later
+- Python 3.10 or later
 - `nginr` installed in your environment (see [requirements.txt](requirements.txt))
 
 ### Installation
