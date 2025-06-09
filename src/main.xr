@@ -18,9 +18,9 @@ fn load_config():
 
 config = load_config()
 
-def get_config_value(key):
+fn get_config_value(key):
     if key not in config:
-        raise ValueError(f"Config key '{key}' not found in nginr_config.yaml. Silakan tambahkan di file config.")
+        raise ValueError(f"Config key '{key}' not found in nginr_config.yaml. Please add in the config file.")
     return config[key]
 
 API_KEY = os.getenv("OPENROUTER_API_KEY")
