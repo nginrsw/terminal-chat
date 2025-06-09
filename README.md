@@ -19,12 +19,14 @@ A simple terminal-based chat application powered by the [`nginr` preprocessor](h
    git clone https://github.com/nginrsw/terminal-chat.git
    cd terminal-chat
    ```
-2. Create and activate a virtual environment:
+2. (Optional) Create and activate a virtual environment:
    ```bash
    python3 -m venv ENV
    source ENV/bin/activate
    ```
    > you can use any virtual environment tools you have / favorite
+   > 
+   > Ignore this command to install all packages from requirements.txt globally (without a virtual environment).
 3. Install dependencies:
    ```bash
    pip install -r requirements.txt
@@ -61,7 +63,7 @@ You can change these values in `nginr_config.yaml` to use a different model or a
 - `requirements.txt` : Python dependencies
 
 ## Contributing
-Contributions are welcome! Please open an issue or submit a pull request.
+Contributions are welcome!
 
 ## License
 This project is licensed under the [MIT License](LICENSE).
