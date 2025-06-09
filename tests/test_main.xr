@@ -1,0 +1,22 @@
+import subprocess
+
+# Run chatbot via nginr and send automated input
+proc = subprocess.Popen(
+    ["nginr", "src/main.xr"],
+    stdin=subprocess.PIPE,
+    stdout=subprocess.PIPE,
+    stderr=subprocess.PIPE,
+    text=True
+)
+
+# Send automated messages to the chatbot, for example 'hi'
+output, error = proc.communicate(input="hi\n")
+
+# Check if the bot gives a response back
+if output and output.strip():
+    print("✅ Test passed")
+else:
+    print("❌ Test failed")
+
+# (optional) show bot output
+print("Chatbot said:", output.strip())

@@ -1,0 +1,5 @@
+model: deepseek/deepseek-r1-0528:free
+provider: openrouter
+temperature: 1.0
+top_p: 1.0
+max_tokens: 1024

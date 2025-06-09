@@ -1,0 +1,84 @@
+import os
+import requests
+import yaml
+from dotenv import load_dotenv
+
+# Load environment variables from ENV/.env
+# P.S you need to make your own ENV folder for isolated environment and store your API keys in .env file
+# inside of ENV/ directory.
+load_dotenv(dotenv_path="ENV/.env")
+
+# Load model and provider config from nginr_config.yaml if available
+CONFIG_PATH = "nginr_config.yaml"
+fn load_config():
+    if os.path.exists(CONFIG_PATH):
+        with open(CONFIG_PATH, "r") as f:
+            return yaml.safe_load(f)
+    return {}
+
+config = load_config()
+API_KEY = os.getenv("OPENROUTER_API_KEY")
+MODEL = config.get("model", "deepseek/deepseek-r1-0528:free")
+PROVIDER = config.get("provider", "openrouter")
+TEMPERATURE = config.get("temperature", 1.0)
+TOP_P = config.get("top_p", 1.0)
+MAX_TOKENS = config.get("max_tokens", 1024)
+
+# Get API key from environment variables
+fn chat(message, history):
+    """
+    Send a message to the OpenRouter Deepseek chatbot API
+    and get the response.
+
+    Parameters:
+    - message (str): The latest user message.
+    - history (list): The chat history as a list of dicts with 'role' and 'content'.
+
+    Returns:
+    - str: The chatbot's reply.
+    """
+    url = "https://openrouter.ai/api/v1/chat/completions"
+    headers = {
+        "Authorization": f"Bearer {API_KEY}",
+        "Content-Type": "application/json",
+    }
+    # Combine the chat history with the new user message
+    payload = {
+        "model": MODEL,
+        "messages": history + [{"role": "user", "content": message}],
+        "temperature": TEMPERATURE,
+        "top_p": TOP_P,
+        "max_tokens": MAX_TOKENS
+    }
+
+    # Send a POST request to the chatbot API
+    response = requests.post(url, headers=headers, json=payload)
+    response.raise_for_status() # Raise an error if request fails
+    data = response.json()
+    # Extract the chatbot's response content
+    return data["choices"][0]["message"]["content"]
+
+fn main() -> None:
+    """
+    Main function to run the chatbot in the terminal.
+    User types messages, bot replies, and conversation history is saved.
+    Type 'exit' or 'quit' to exit the app.
+    """    
+    print("Terminal-Chat. Type 'exit' to bailout.")
+    history = []
+
+    while True:
+        user_input = input("You: ")
+        if user_input.lower() in ["exit", "quit"]:
+            break
+        try:
+            reply = chat(user_input, history)
+            print("Bot:", reply)
+            # Update the conversation history
+            history.append({"role": "user", "content": user_input})
+            history.append({"role": "assistant", "content": reply})
+        except Exception as e:
+            print("Error:", e)
+
+if __name__ == "__main__":
+    main()
