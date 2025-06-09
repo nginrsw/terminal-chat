@@ -6,6 +6,17 @@ This project uses the OpenRouter Chat Completion API to interact with large lang
 **ID:**
 Proyek ini menggunakan OpenRouter Chat Completion API untuk berinteraksi dengan model bahasa besar (LLM).
 
+---
+
+### [2025-06-09] Update: Unified Configuration
+
+- All model and API configuration (model, provider, temperature, top_p, max_tokens) are now loaded exclusively from `nginr_config.yaml`.
+- No more default/fallback values in code. If a config key is missing, the app will raise a clear error.
+- To change model or parameters, edit only `nginr_config.yaml`.
+- See `src/main.xr` for details.
+
+---
+
 ## Endpoint
 ```
 POST https://openrouter.ai/api/v1/chat/completions

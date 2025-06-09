@@ -29,3 +29,13 @@ Proyek ini adalah chat client berbasis terminal yang terhubung ke API LLM OpenRo
 - **Lingkungan terisolasi:** Menggunakan `ENV/` untuk virtual environment dan rahasia.
 - **Mudah dikembangkan:** Mudah menambah fitur CLI, logging, atau bahkan GUI/web API.
 - **Konfigurasi fleksibel:** Model/provider bisa diubah lewat `nginr_config.yaml` atau argumen command-line (nanti).
+
+---
+
+### [2025-06-09] Update: Configuration Handling
+
+- All configuration (model, provider, temperature, top_p, max_tokens) is now loaded only from `nginr_config.yaml`.
+- The main loop now prints a separator (`---`) before every user input and bot reply for better readability.
+- No more config fallback in code; missing config will raise an error.
+
+---

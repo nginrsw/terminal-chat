@@ -1,4 +1,4 @@
-model: deepseek/deepseek-r1-0528:free
+model: deepseek/deepseek-r1-0528-qwen3-8b:free
 provider: openrouter
 temperature: 1.0
 top_p: 1.0

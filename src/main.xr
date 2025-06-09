@@ -17,12 +17,18 @@ fn load_config():
     return {}
 
 config = load_config()
+
+def get_config_value(key):
+    if key not in config:
+        raise ValueError(f"Config key '{key}' not found in nginr_config.yaml. Silakan tambahkan di file config.")
+    return config[key]
+
 API_KEY = os.getenv("OPENROUTER_API_KEY")
-MODEL = config.get("model", "deepseek/deepseek-r1-0528:free")
-PROVIDER = config.get("provider", "openrouter")
-TEMPERATURE = config.get("temperature", 1.0)
-TOP_P = config.get("top_p", 1.0)
-MAX_TOKENS = config.get("max_tokens", 1024)
+MODEL = get_config_value("model")
+PROVIDER = get_config_value("provider")
+TEMPERATURE = get_config_value("temperature")
+TOP_P = get_config_value("top_p")
+MAX_TOKENS = get_config_value("max_tokens")
 
 # Get API key from environment variables
 fn chat(message, history):
@@ -68,12 +74,13 @@ fn main() -> None:
     history = []
 
     while True:
+        print("---")
         user_input = input("You: ")
         if user_input.lower() in ["exit", "quit"]:
             break
         try:
             reply = chat(user_input, history)
-            print("Bot:", reply)
+            print("---\nBot:", reply)
             # Update the conversation history
             history.append({"role": "user", "content": user_input})
             history.append({"role": "assistant", "content": reply})
