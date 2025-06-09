@@ -44,7 +44,7 @@ nginr tests/test_main.xr
 ```
 
 ## Configuration Example
-This project uses a YAML config file (`nginr_config.yaml`) to set the model and other parameters. By default, it uses the Deepseek model via OpenRouter:
+This project uses a YAML config file (`nginr_config.yaml`) to extend and set the model or other parameters. By default, it uses the Deepseek model via OpenRouter:
 
 ```yaml
 model: deepseek/deepseek-r1-0528:free
